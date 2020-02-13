@@ -2,7 +2,7 @@
 package org.jrenner.fps;
 
 import com.badlogic.gdx.math.Quaternion;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+//import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g3d.Model;
@@ -68,7 +68,7 @@ public class Sky {
 	}
 
 	public static void createSkySphere () {
-		throw new NotImplementedException();
+		//throw new NotImplementedException();
 	}
 
 	private static final Vector3 tmp = new Vector3();

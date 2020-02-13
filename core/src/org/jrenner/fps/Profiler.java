@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 /** utility class that builds on the built-in libgdx GLProfiler */
 public class Profiler {
 	private static Profiler instance;
+	private static GLProfiler glProfiler;
 	public static int reportIntervalInFrames = 60;
 	private RollingArray drawCalls = new RollingArray();
 	private RollingArray calls = new RollingArray();
@@ -14,29 +15,33 @@ public class Profiler {
 	private RollingArray vertices = new RollingArray();
 	private RollingArray fpsCounter = new RollingArray();
 
+	static {
+		glProfiler = new GLProfiler(Gdx.graphics);
+	}
+
 	public static void enable() {
 		instance = new Profiler();
-		GLProfiler.enable();
+		glProfiler.enable();
 	}
 
 	public static void disable() {
 		instance = null;
-		GLProfiler.disable();
+		glProfiler.disable();
 	}
 
 	public static void reset() {
-		GLProfiler.reset();
+		glProfiler.reset();
 	}
 
 	public static void tick() {
 		if (instance == null) {
 			instance = new Profiler();
 		}
-		instance.drawCalls.add(GLProfiler.drawCalls);
-		instance.calls.add(GLProfiler.calls);
-		instance.shaderSwitches.add(GLProfiler.shaderSwitches);
-		instance.textureBinds.add(GLProfiler.textureBindings);
-		instance.vertices.add(GLProfiler.vertexCount.count);
+		instance.drawCalls.add(glProfiler.getDrawCalls());
+		instance.calls.add(glProfiler.getCalls());
+		instance.shaderSwitches.add(glProfiler.getShaderSwitches());
+		instance.textureBinds.add(glProfiler.getTextureBindings());
+		instance.vertices.add(glProfiler.getVertexCount().count);
 		instance.fpsCounter.add(Gdx.graphics.getFramesPerSecond());
 		if (Main.frame % reportIntervalInFrames == 0) {
 			Log.debug(instance.reportAverage());

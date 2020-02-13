@@ -79,9 +79,9 @@ public class TerrainChunk implements Disposable{
 	private void calculateBoundingBox() {
 		modelInstance.calculateTransforms();
 		modelInstance.calculateBoundingBox(box);
-		dimensions = new Vector3(box.getDimensions());
+		box.getDimensions(dimensions);
 		radius = dimensions.len() / 2f;
-		position = new Vector3(box.getCenter());
+		box.getCenter(position);
 	}
 	
 	public boolean isVisible(Camera cam) {

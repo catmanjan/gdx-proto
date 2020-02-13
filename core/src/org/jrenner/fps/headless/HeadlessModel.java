@@ -84,7 +84,7 @@ public class HeadlessModel implements Disposable {
 				if (node == null) continue;
 				NodeAnimation nodeAnim = new NodeAnimation();
 				nodeAnim.node = node;
-				for (ModelNodeKeyframe kf : nanim.keyframes) {
+				/*for (ModelNodeKeyframe kf : nanim.keyframes) {
 					if (kf.keytime > animation.duration) animation.duration = kf.keytime;
 					NodeKeyframe keyframe = new NodeKeyframe();
 					keyframe.keytime = kf.keytime;
@@ -93,7 +93,7 @@ public class HeadlessModel implements Disposable {
 					keyframe.translation.set(kf.translation == null ? node.translation : kf.translation);
 					nodeAnim.keyframes.add(keyframe);
 				}
-				if (nodeAnim.keyframes.size > 0) animation.nodeAnimations.add(nodeAnim);
+				if (nodeAnim.keyframes.size > 0) animation.nodeAnimations.add(nodeAnim);*/
 			}
 			if (animation.nodeAnimations.size > 0) animations.add(animation);
 		}
@@ -118,7 +118,7 @@ public class HeadlessModel implements Disposable {
 	private Node loadNode (Node parent, ModelNode modelNode) {
 		Node node = new Node();
 		node.id = modelNode.id;
-		node.parent = parent;
+		parent.addChild(node);
 
 		if (modelNode.translation != null) node.translation.set(modelNode.translation);
 		if (modelNode.rotation != null) node.rotation.set(modelNode.rotation);
@@ -148,7 +148,7 @@ public class HeadlessModel implements Disposable {
 
 		if (modelNode.children != null) {
 			for (ModelNode child : modelNode.children) {
-				node.children.add(loadNode(node, child));
+				node.addChild(loadNode(node, child));
 			}
 		}
 
@@ -180,11 +180,11 @@ public class HeadlessModel implements Disposable {
 			MeshPart meshPart = new MeshPart();
 			meshPart.id = part.id;
 			meshPart.primitiveType = part.primitiveType;
-			meshPart.indexOffset = offset;
-			meshPart.numVertices = part.indices.length;
+			meshPart.offset = offset;
+			meshPart.size = part.indices.length;
 			meshPart.mesh = mesh;
 			mesh.getIndicesBuffer().put(part.indices);
-			offset += meshPart.numVertices;
+			offset += meshPart.size;
 			meshParts.add(meshPart);
 		}
 		mesh.getIndicesBuffer().position(0);

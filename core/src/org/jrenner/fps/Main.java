@@ -48,7 +48,9 @@ public class Main extends ApplicationAdapter {
 		Assets assets = new Assets();
 		assets.loadAll();
 		Log.debug("finished loading assets");
-		physics = new Physics();
+		if (!isClient()) {
+			physics = new Physics();
+		}
 		initializeSubModules();
 		frame = 0;
 		inst = this;
@@ -112,7 +114,9 @@ public class Main extends ApplicationAdapter {
 				client.update();
 			}
 
-			updateWorld();
+			if (!isClient()) {
+				updateWorld();
+			}
 		} catch (Exception e) {
 			if (!isHeadless()) {
 				Gdx.input.setCursorCatched(false);

@@ -20,7 +20,7 @@ allprojects {
     version = '1.0'
     ext {
         appName = 'fps'
-        gdxVersion = '1.4.1'
+        gdxVersion = '1.9.10'
         customGdxLocation = '/home/jrenner/libgdx/dist'
     }
 
@@ -99,6 +99,26 @@ project(":texture-packer") {
         api "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
         api "com.github.czyzby:gdx-websocket:1.9.1.9.8-20180118.131913-2"
         api "com.github.czyzby:gdx-websocket-serialization:1.9.1.9.8-20180118.132003-2"
+    }
+}
+
+project(":html") {
+    apply plugin: "java-library"
+    apply plugin: "gwt"
+    apply plugin: "war"
+
+
+    dependencies {
+        implementation project(":core")
+        api "com.github.czyzby:gdx-websocket:1.9.1.9.8-20180118.131913-2:sources"
+        api "com.github.czyzby:gdx-websocket-gwt:1.9.1.9.8-20180118.131948-2"
+        api "com.github.czyzby:gdx-websocket-gwt:1.9.1.9.8-20180118.131948-2:sources"
+        api "com.github.czyzby:gdx-websocket-serialization:1.9.1.9.8-20180118.132003-2"
+        api "com.github.czyzby:gdx-websocket-serialization:1.9.1.9.8-20180118.132003-2:sources"
+        api "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion"
+        api "com.badlogicgames.gdx:gdx:$gdxVersion:sources"
+        api "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion:sources"
+
     }
 }
 

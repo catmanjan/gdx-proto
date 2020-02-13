@@ -135,7 +135,7 @@ public class HeadlessG3dModelLoader extends HeadlessModelLoader<HeadlessModelLoa
 			} else if (attr.equals("COLOR")) {
 				vertexAttributes.add(VertexAttribute.ColorUnpacked());
 			} else if (attr.equals("COLORPACKED")) {
-				vertexAttributes.add(VertexAttribute.Color());
+				vertexAttributes.add(VertexAttribute.ColorPacked());
 			} else if (attr.equals("TANGENT")) {
 				vertexAttributes.add(VertexAttribute.Tangent());
 			} else if (attr.equals("BINORMAL")) {
@@ -266,7 +266,7 @@ public class HeadlessG3dModelLoader extends HeadlessModelLoader<HeadlessModelLoa
 				ModelNodeAnimation nodeAnim = new ModelNodeAnimation();
 				animation.nodeAnimations.add(nodeAnim);
 				nodeAnim.nodeId = node.getString("boneId");
-				nodeAnim.keyframes.ensureCapacity(keyframes.size);
+				/*nodeAnim.keyframes.ensureCapacity(keyframes.size);
 
 				for (JsonValue keyframe = keyframes.child; keyframe != null; keyframe = keyframe.next) {
 					ModelNodeKeyframe kf = new ModelNodeKeyframe();
@@ -282,7 +282,7 @@ public class HeadlessG3dModelLoader extends HeadlessModelLoader<HeadlessModelLoa
 					JsonValue scale = keyframe.get("scale");
 					if (scale != null && scale.size == 3)
 						kf.scale = new Vector3(scale.getFloat(0), scale.getFloat(1), scale.getFloat(2));
-				}
+				}*/
 			}
 		}
 	}

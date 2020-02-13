@@ -17,9 +17,10 @@ public class GroundChunk extends ModelInstance {
 		super(model);
 		calculateTransforms();
 		calculateBoundingBox(box);
-		dimensions = new Vector3(box.getDimensions());
+
+		box.getDimensions(dimensions);
 		radius = dimensions.len() / 2f;
-		position = new Vector3(box.getCenter());
+		box.getCenter(position);
 		//		Lists.groundChunks.add(this);
 	}
 

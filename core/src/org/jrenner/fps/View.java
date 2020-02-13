@@ -71,8 +71,8 @@ public class View implements Disposable {
 		float fov = 67f;
 		camera = new PerspectiveCamera(fov, width(), height());
 		// camera.far affects frustrum culling, so a shorter distance can boost performance
-		camera.far = 60f;
-		camera.near = 0.01f;
+		camera.far = 1000f;
+		camera.near = 0.1f;
 		resetCamera();
 
 		initShaders();
@@ -82,18 +82,18 @@ public class View implements Disposable {
 		basicEnviron = new Environment();
 		camLight = new PointLight();
 		float intensity = 100f;
-		camLight.set(new Color(0.2f, 0.2f, 0.2f, 1f), 0f, 0f, 0f, intensity);
-		ColorAttribute ambientLight = ColorAttribute.createAmbient(new Color(0.1f, 0.1f, 0.1f, 1f));
+		camLight.set(new Color(0.8f, 0.8f, 0.8f, 1f), 0f, 0f, 0f, intensity);
+		ColorAttribute ambientLight = ColorAttribute.createAmbient(new Color(0.8f, 0.8f, 0.8f, 1f));
 		environ.set(ambientLight);
 		ColorAttribute fog = new ColorAttribute(ColorAttribute.Fog);
 		fog.color.set(fogColor);
 		environ.set(fog);
 		environ.add(camLight);
 		dirLight = new DirectionalLight();
-		dirLight.set(new Color(0.3f, 0.3f, 0.35f, 1f), -0.25f, -0.75f, 0.25f);
+		dirLight.set(new Color(0.8f, 0.8f, 0.8f, 1f), -0.25f, -0.75f, 0.25f);
 		environ.add(dirLight);
 
-		basicEnviron.set(ColorAttribute.createAmbient(0.3f, 0.3f, 0.3f, 1f));
+		basicEnviron.set(ColorAttribute.createAmbient(0.8f, 0.8f, 0.8f, 1f));
 
 		if (Toggleable.profileGL()) {
 			Profiler.enable();

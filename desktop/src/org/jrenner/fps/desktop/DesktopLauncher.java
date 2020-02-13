@@ -11,7 +11,7 @@ public class DesktopLauncher {
 		cfg = new LwjglApplicationConfiguration();
 		cfg.title = "FPS";
 		cfg.resizable = true;
-		//cfg.samples = 8; // anti-aliasing
+		cfg.samples = 2; // anti-aliasing
 		cfg.width = 1280;
 		cfg.height = 720;
 		cfg.fullscreen = false;
